@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: theme('colors.helix-light');
+    --foreground: theme('colors.helix-dark');
+    --primary: theme('colors.helix-accent');
+    --primary-foreground: theme('colors.helix-dark');
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+  }
+
+  .dark {
+    --background: theme('colors.helix-dark');
+    --foreground: theme('colors.helix-light');
+    --primary: theme('colors.helix-accent');
+    --primary-foreground: theme('colors.helix-light');
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
