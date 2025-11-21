@@ -29,7 +29,7 @@
 > Project overview, problem statement, and solution demonstration
 
 ### 📊 **Pitch Deck**
-🔗 **[View Presentation](https://drive.google.com/file/d/1v2i2EHywrPNiXXWuvsf_nko_78V1Klie/view)**
+🔗 **[View Presentation](https://drive.google.com/file/d/1xN1p61xlhPg0lArSpM97refR3WYJjXwG/view?usp=sharing)**
 > Comprehensive project overview, market analysis, and technical architecture
 
 ---
