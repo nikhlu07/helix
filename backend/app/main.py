@@ -483,53 +483,6 @@ class FraudDetectionService:
                 claim_id=claim_data.claim_id,
                 score=50,
                 risk_level="medium",
-                flags=["ANALYSIS_ERROR"],
-                reasoning=f"Analysis failed: {str(e)}",
-                confidence=0.1
-            )
-    
-    async def _update_hedera_fraud_score(self, fraud_score: FraudScore):
-        """Send fraud score back to Hedera"""
-        try:
-            # Mock Hedera update for now
-            # await hedera_service.update_fraud_score(fraud_score.claim_id, fraud_score.score)
-            logger.info(f"Updated Hedera (Mock): Claim {fraud_score.claim_id} scored {fraud_score.score}")
-        except Exception as e:
-            logger.error(f"Failed to update Hedera fraud score: {str(e)}")
-    
-    async def _generate_fraud_alert(self, claim_data: ClaimData, fraud_score: FraudScore):
-        """Generate fraud alert for high-risk claims"""
-        try:
-            # Mock Hedera alert
-            # await hedera_service.add_fraud_alert(...)
-            logger.warning(f"FRAUD ALERT: Claim {claim_data.claim_id} - {fraud_score.score}/100")
-        except Exception as e:
-            logger.error(f"Failed to generate fraud alert: {str(e)}")
-
-# Initialize fraud detection service
-fraud_service = FraudDetectionService()
-
-# ================================================================================
-# MAIN FASTAPI APPLICATION
-# ================================================================================
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Application lifespan management"""
-    logger.info("🚀 CorruptGuard Backend Starting...")
-    logger.info(f"Environment: {settings.ENVIRONMENT}")
-    logger.info(f"Fraud Detection: {'Enabled' if settings.FRAUD_DETECTION_ENABLED else 'Disabled'}")
-    logger.info("✅ CorruptGuard Backend Started Successfully")
-    try:
-        Base.metadata.create_all(bind=engine)
-        logger.info("📦 Database tables ensured")
-    except Exception as e:
-        logger.error(f"DB init failed: {e}")
-    
-    yield
-    
-    logger.info("🛑 CorruptGuard Backend Shutting Down...")
-
 app = FastAPI(
     title="TransGov API",
     description="""

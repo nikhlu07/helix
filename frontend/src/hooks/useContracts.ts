@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import hederaWallet from '../auth/hederaWallet';
-import { authService } from '../auth/authService';
 
 export interface ContractState {
   loading: boolean;
@@ -114,7 +113,7 @@ export const useContract = () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
 
     try {
-      const response = await authService.apiCall(endpoint, options);
+      const response = await hederaWallet.apiRequest(endpoint, options);
 
       if (!response.ok) {
         // Try to parse error message

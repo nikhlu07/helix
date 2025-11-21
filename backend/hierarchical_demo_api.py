@@ -317,7 +317,7 @@ async def get_flow_status():
             },
             "blockchain": {
                 "status": "simulated",
-                "canisters": ["helix_backend", "helix_frontend"],
+                "services": ["helix_backend", "helix_frontend"],
                 "last_sync": datetime.now().isoformat()
             },
             "real_time": {

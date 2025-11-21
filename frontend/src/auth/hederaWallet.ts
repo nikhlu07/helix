@@ -11,6 +11,7 @@ import type {
   DemoUser,
   AuthResponse
 } from './types';
+import { hederaService } from '../services/hederaService';
 
 // Configuration
 interface Config {
@@ -43,10 +44,8 @@ class HederaAuth {
   async init(): Promise<void> {
     try {
       console.log('🔧 Initializing Hedera auth client...');
-
       // Check for existing session
       await this.restoreAuth();
-
     } catch (error) {
       console.error('❌ Failed to initialize auth client:', error);
       throw error;
@@ -54,27 +53,25 @@ class HederaAuth {
   }
 
   /**
-   * Login with Hedera Wallet (Mock for now)
+   * Login with Hedera Wallet
    */
   async login(): Promise<User> {
     try {
       console.log('🔐 Starting Hedera wallet login...');
 
-      // TODO: Integrate real Hedera wallet (HashPack/Blade)
-      // For now, simulate login
+      const walletData = await hederaService.connectWallet();
 
-      return new Promise<User>((resolve) => {
-        setTimeout(async () => {
-          // Mock successful login
-          const mockPrincipal = "0.0.123456"; // Mock Account ID
-          await this.handleAuthSuccess(mockPrincipal);
-          if (this.userProfile) {
-            resolve(this.userProfile);
-          } else {
-            throw new Error('Failed to get user profile after login');
-          }
-        }, 1000);
-      });
+      if (!walletData || !walletData.accountId) {
+        throw new Error("Wallet connection failed or rejected");
+      }
+
+      await this.handleAuthSuccess(walletData.accountId);
+
+      if (this.userProfile) {
+        return this.userProfile;
+      } else {
+        throw new Error('Failed to get user profile after login');
+      }
     } catch (error) {
       console.error('❌ Login failed:', error);
       throw error;

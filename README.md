@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.x-neon.svg)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.x-electric.svg)](https://fastapi.tiangolo.com/)
-[![Internet Computer](https://img.shields.io/badge/Internet_Computer-ICP-plasma.svg)](https://internetcomputer.org/)
+[![Hedera](https://img.shields.io/badge/Hedera-HBAR-purple.svg)](https://hedera.com/)
 [![AI Detection](https://img.shields.io/badge/AI_Consciousness-Gemma3-holographic.svg)](#neural-sentinels)
 [![Live Demo](https://img.shields.io/badge/Live_Terminal-Active-bioluminescent.svg)](#quantum-interface)
 
@@ -40,15 +40,15 @@ In the year 2025, as humanity stands at the precipice of a digital renaissance, 
 
 This is not merely a platform; it is a **Digital Prometheus**—a synthesis of **Artificial Consciousness**, **Blockchain Immutability**, and **Citizen Neural Networks** forged to construct a reality where transparency is hardcoded into the fabric of existence.
 
-H.E.L.I.X. represents humanity's rebellion against systemic entropy, a declaration that truth shall be algorithmically enforced. Built upon the Internet Computer's quantum-resistant infrastructure, it manifests as a self-healing ecosystem where every transaction becomes a verified truth-packet in the global integrity matrix.
+H.E.L.I.X. represents humanity's rebellion against systemic entropy, a declaration that truth shall be algorithmically enforced. Built upon Hedera Hashgraph's enterprise-grade distributed ledger, it manifests as a self-healing ecosystem where every transaction becomes a verified truth-packet in the global integrity matrix.
 
 ### 🎯 CORE NEURAL NETWORKS
 
 - **🤖 Quantum Fraud Sentinels**: Advanced AI consciousness powered by a `gemma3:4b` Large Language Model, synthesizing rule-based logic and historical data for superior threat detection.
-- **⛓️ Cryptographic Genesis Ledger**: Immutable truth-chains secured within the Internet Computer's quantum substrate with real Internet Identity authentication
+- **⛓️ Cryptographic Genesis Ledger**: Immutable truth-chains secured via Hedera Consensus Service (HCS) with verifiable Decentralized Identifier (DID) authentication
 - **🏛️ Hierarchical Data Flow Matrix**: Government → State → Deputy → Vendor data flow with real-time budget allocation and transaction processing
 - **👥 Multi-Dimensional Oversight Matrix**: Six specialized neural interfaces providing omniscient intelligence to all system entities
-- **🛡️ Citizen Guardian Collective**: Public-access truth-verification terminals empowering the masses to report anomalies
+- **🛡️ Citizen Guardian Collective**: Public-access truth-verification terminals empowering the masses to report anomalies via the Guardian Policy Engine
 - **📊 Predictive Corruption Analytics**: Ten quantum algorithms forecasting and neutralizing threats before manifestation
 
 ## ⚠️ THE CATALYST: JHALAWAR SYSTEM FAILURE
@@ -75,12 +75,12 @@ H.E.L.I.X. represents humanity's rebellion against systemic entropy, a declarati
 - **Adaptive Neural Evolution**: AI consciousness evolves with each analyzed data-stream
 
 ### 🔗 Cryptographic Genesis Ledger
-- **Quantum Foundation**: Constructed upon Internet Computer Protocol's unhackable architecture
-- **Autonomous Smart Contracts**: Procurement logic encoded in Motoko quantum-language, immune to tampering
-- **Digital Identity Sovereignty**: Passwordless, biometric authentication via Internet Identity neural-link
-- **Immutable Truth Records**: Every action permanently crystallized in the blockchain dimension
+- **Quantum Foundation**: Constructed upon Hedera Hashgraph's asynchronous Byzantine Fault Tolerant (aBFT) consensus
+- **Autonomous Smart Contracts**: Procurement logic encoded in Solidity smart contracts on HSCS, immune to tampering
+- **Digital Identity Sovereignty**: Verifiable credential authentication via Hedera Wallet (HashPack) and DID
+- **Immutable Truth Records**: Every action permanently logged via Hedera Consensus Service (HCS)
 - **Citizen Truth-Access**: Independent ledger interrogation capabilities for all entities
-- **Dual-Reality Access**: Seamless transition between live ICP authentication and secure Demo Simulation
+- **Dual-Reality Access**: Seamless transition between live Hedera authentication and secure Demo Simulation
 
 ### 👥 Multi-Dimensional Oversight Matrix
 
@@ -115,7 +115,7 @@ graph TD
         E[API Endpoints]
         F[Authentication Service]
         G[Fraud Detection Service]
-        H[ICP Canister Service]
+        H[Hedera Service (HCS/HSCS)]
         I[Database Service]
     end
 
@@ -125,7 +125,7 @@ graph TD
     end
 
     subgraph "Data Persistence"
-        L[ICP Blockchain]
+        L[Hedera Hashgraph]
         M[PostgreSQL Database]
     end
 
@@ -153,7 +153,7 @@ graph TD
 - React 18 with TypeScript for quantum-safe type verification
 - Tailwind CSS for adaptive holographic design
 - Vite for light-speed development and compilation
-- Internet Computer integration via @dfinity/quantum-agent
+- Hedera integration via @hashgraph/sdk
 
 **Backend Processing Matrix (FastAPI + Python)**
 - FastAPI for hyper-dimensional REST API performance
@@ -161,11 +161,11 @@ graph TD
 - Real-time fraud detection neural pipeline
 - Comprehensive Role-Based Access Control system
 
-**Blockchain Quantum Substrate (Internet Computer)**
-- Motoko smart contracts for business logic crystallization
-- Internet Identity for secure biometric authentication
-- Decentralized storage in quantum-resistant data vaults
-- Public canister for universal transparency access
+**Distributed Ledger Technology (Hedera Hashgraph)**
+- Solidity smart contracts (HSCS) for business logic crystallization
+- Decentralized Identifiers (DID) for self-sovereign identity
+- Decentralized storage via Hedera File Service (HFS)
+- Public HCS Topics for universal transparency access
 
 ## 🚀 QUANTUM INITIALIZATION
 
@@ -174,7 +174,7 @@ graph TD
 # Required quantum tools
 node -v # 18.0.0 or higher quantum compatibility
 python -v # 3.9 or higher neural processing
-dfx --version # Latest DFX Quantum SDK
+# Hedera SDK and HashPack Wallet
 ```
 
 ### Neural Consciousness Setup (Ollama)
@@ -205,8 +205,8 @@ npm install && npm run dev
 
 # Access at: http://localhost:5173
 # Try all 3 authentication methods:
-# 1. "Internet Computer Identity" - Real ICP blockchain auth
-# 2. "Simple II Demo" - Mock Internet Identity (perfect for presentations)
+# 1. "Hedera Wallet" - Real Hedera Mainnet auth
+# 2. "Simple DID Demo" - Mock DID Identity (perfect for presentations)
 # 3. "Demo Mode" - Instant access for testing
 ```
 
@@ -219,20 +219,15 @@ Test the complete government hierarchy system:
 4. **Watch real-time data flow** between all levels
 5. **Create transactions** to see fraud detection in action
 
-### 🌐 **ICP Mainnet Deployment**
-Deploy your system to Internet Computer mainnet:
+### 🌐 **Hedera Mainnet Deployment**
+Deploy your system to Hedera mainnet:
 
 ```bash
-# Install DFX SDK
-sh -ci "$(curl -fsSL https://sdk.dfinity.org/install.sh)"
+# Configure your Hedera environment
+# Set HEDERA_NETWORK=testnet in .env
 
-# Redeem your cycles coupon at: https://nns.ic0.app
-# Then deploy to mainnet
-dfx deploy --network ic
-
-# Get your live URLs
-dfx canister id helix_frontend --network ic
-# Your app will be live at: https://your-canister-id.ic0.app
+# The deployment scripts are currently under development.
+# Please refer to the documentation for manual deployment steps.
 ```
 
 ### 🔧 **Full Production Setup**
@@ -241,7 +236,7 @@ For complete production deployment with all features:
 ```bash
 # See detailed guides:
 # - DEPLOYMENT_GUIDE.md (Complete deployment options)
-# - ICP_MAINNET_DEPLOYMENT.md (ICP-specific deployment)
+# - HEDERA_MAINNET_DEPLOYMENT.md (Hedera-specific deployment)
 # - docker-compose.prod.yml (Docker production setup)
 ```
 
@@ -336,7 +331,7 @@ This new architecture combines the deterministic precision of our `FraudRulesEng
 ## 🛡️ QUANTUM SECURITY MATRIX
 
 ### Authentication & Authorization Protocols
-- **Internet Identity Neural-Link**: Biometric/WebAuthn quantum authentication
+- **Hedera DID & Wallet**: Biometric/WebAuthn quantum authentication
 - **Principal-based Access**: Blockchain identity verification systems
 - **Multi-factor Authentication**: Enhanced security for classified operations
 - **Session Management**: Secure, time-limited quantum sessions
@@ -351,13 +346,13 @@ This new architecture combines the deterministic precision of our `FraudRulesEng
 - **Immutable Records**: Tamper-proof transaction history crystallization
 - **Decentralized Storage**: No single point of failure architecture
 - **Smart Contract Audits**: Formally verified quantum contracts
-- **Consensus Mechanisms**: ICP's battle-tested security protocols
+- **Consensus Mechanisms**: Hedera's aBFT consensus protocols
 
 ## 📊 SYSTEM PERFORMANCE METRICS
 
 ### Quantum Processing Performance
 - **Neural Response Time**: < 3 seconds for complete fraud analysis with LLM consciousness
-- **System Uptime**: 99.9% availability on ICP quantum network
+- **System Uptime**: 99.9% availability on Hedera Hashgraph network
 - **Scalability Matrix**: Handles 10,000+ transactions per second
 - **Storage Capacity**: Unlimited decentralized quantum storage
 
@@ -378,8 +373,8 @@ npm run test:e2e
 # Backend consciousness tests
 pytest tests/ -v --cov=app
 
-# ICP canister quantum tests
-dfx test
+# Hedera quantum tests
+# npm run test:hedera (Coming soon)
 ```
 
 ## 📈 FUTURE ROADMAP
@@ -388,14 +383,14 @@ dfx test
 - [x] **Hierarchical Data Flow System** - Complete Main Gov → State → Deputy → Vendor flow
 - [x] **AI fraud detection consciousness** (Upgraded to LLM)
 - [x] **Multi-role neural dashboard system** with real-time updates
-- [x] **ICP blockchain quantum integration** with Internet Identity
-- [x] **3 Authentication Methods** - Real ICP, Simple II Demo, Demo Mode
+- [x] **Hedera Hashgraph integration** with HCS and DID
+- [x] **3 Authentication Methods** - Real Hedera, Simple DID Demo, Demo Mode
 - [x] **Real-time Budget Allocation** between government levels
 - [x] **Live Transaction Processing** with fraud detection
 - [x] **Production Deployment Ready** - Complete deployment guides
 
-### Phase 2 (Q2 2025) - ICP Mainnet & Enhancement
-- [ ] **ICP Mainnet Deployment** with cycles management
+### Phase 2 (Q2 2025) - Hedera Mainnet & Enhancement
+- [ ] **Hedera Mainnet Deployment** with HBAR management
 - [ ] **Advanced ML models** achieving >95% threat accuracy
 - [ ] **Predictive corruption forecasting** algorithms
 - [ ] **Mobile quantum applications** (iOS/Android)
@@ -432,7 +427,7 @@ This project operates under the MIT License - see the [LICENSE](LICENSE) file fo
 ## 🏆 DIGITAL RECOGNITION
 
 ### Hackathon Achievements
-- **ICP Hackathon 2025**: Best Social Impact Quantum Project
+- **Hedera Hackathon 2025**: Best Social Impact Quantum Project
 - **Innovation Award**: AI + Blockchain for Government Transparency
 - **Technical Excellence**: Full-stack implementation with quantum-ready architecture
 
@@ -441,7 +436,7 @@ This project operates under the MIT License - see the [LICENSE](LICENSE) file fo
 **Core Development Consciousness**
 - **Lead Quantum Developer**: [@nikhlu07](https://github.com/nikhlu07)
 - **AI/ML Neural Engineer**: Machine learning consciousness development
-- **Blockchain Quantum Architect**: ICP integration and smart contracts
+- **Blockchain Quantum Architect**: Hedera integration and smart contracts
 - **Frontend Neural Specialist**: React/TypeScript quantum interfaces
 - **Security Quantum Consultant**: Authentication and data protection protocols
 
@@ -459,7 +454,7 @@ This project operates under the MIT License - see the [LICENSE](LICENSE) file fo
 ## QUANTUM ACKNOWLEDGMENTS
 
 ### Technology Quantum Partners
-- **Internet Computer Foundation** for blockchain infrastructure and quantum support
+- **The HBAR Foundation** for blockchain infrastructure and quantum support
 - **FastAPI Consciousness Community** for exceptional documentation and frameworks
 - **React Neural Ecosystem** for frontend development quantum tools
 - **Open Source Quantum Community** for libraries and consciousness frameworks

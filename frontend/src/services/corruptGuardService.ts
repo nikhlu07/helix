@@ -1,6 +1,7 @@
 // CorruptGuard Service - Handles Backend API and Hedera Integration
 import { apiGet, apiPost, apiGetWithToken } from './api';
-import { AuthService, User } from './authService';
+import hederaAuth from '../auth/hederaWallet';
+import type { User, UserRole } from '../auth/types';
 
 export interface FraudDetectionRequest {
   claim_id: number;
@@ -85,24 +86,25 @@ export interface DemoLoginResponse {
 }
 
 class CorruptGuardService {
-  private authService: AuthService;
   private currentUser: User | null = null;
   private accessToken: string | null = null;
 
   constructor() {
-    this.authService = new AuthService();
+    // Auth handled by singleton hederaAuth
   }
 
   // Authentication Methods
   async init(): Promise<void> {
-    await this.authService.init();
+    await hederaAuth.init();
+    this.currentUser = hederaAuth.user;
+    this.accessToken = hederaAuth.token;
   }
 
   async loginWithHedera(): Promise<User> {
     try {
-      const user = await this.authService.login();
+      const user = await hederaAuth.login();
       this.currentUser = user;
-      this.accessToken = user.accessToken || null;
+      this.accessToken = hederaAuth.token;
       return user;
     } catch (error) {
       console.error('Hedera login failed:', error);
@@ -112,24 +114,21 @@ class CorruptGuardService {
 
   async loginWithDemo(role: string): Promise<User> {
     try {
-      const response = await this.authService.demoLogin(role);
-      this.currentUser = response;
-      this.accessToken = response.accessToken || null;
+      // Generate a mock principal for demo
+      const mockPrincipal = `demo-${role}-${Date.now()}`;
+      const user = await hederaAuth.loginDemo(mockPrincipal, role as UserRole);
 
-      // Store demo token for API calls
-      if (response.accessToken) {
-        localStorage.setItem('demo_access_token', response.accessToken);
-        localStorage.setItem('demo_user_role', role);
-      }
+      this.currentUser = user;
+      this.accessToken = hederaAuth.token;
 
       console.log('✅ Demo login successful:', {
-        role: response.role,
-        name: response.name,
-        isAuthenticated: response.isAuthenticated,
-        hasToken: !!response.accessToken
+        role: user.role,
+        name: user.name,
+        isAuthenticated: hederaAuth.authenticated,
+        hasToken: !!this.accessToken
       });
 
-      return response;
+      return user;
     } catch (error) {
       console.error('Demo login failed:', error);
       throw error;
@@ -138,23 +137,9 @@ class CorruptGuardService {
 
   async logout(): Promise<void> {
     try {
-      // Clear local storage
-      localStorage.removeItem('demo_access_token');
-      localStorage.removeItem('demo_user_role');
-
-      // Call backend logout
-      if (this.accessToken) {
-        try {
-          await apiPost('/api/v1/auth/logout', {}, {}, true);
-        } catch (error) {
-          console.warn('Backend logout failed:', error);
-        }
-      }
-
-      // Reset state
+      await hederaAuth.logout();
       this.currentUser = null;
       this.accessToken = null;
-
       console.log('✅ Logout successful');
     } catch (error) {
       console.error('Logout error:', error);
@@ -162,39 +147,18 @@ class CorruptGuardService {
   }
 
   async getCurrentUser(): Promise<User | null> {
-    // First check if we have a stored demo token
-    const demoToken = localStorage.getItem('demo_access_token');
-    const demoRole = localStorage.getItem('demo_user_role');
-
-    if (demoToken && demoRole && !this.currentUser) {
-      try {
-        // Verify token is still valid by making a test request
-        const response = await apiGetWithToken('/api/v1/auth/profile', demoToken);
-
-        // Convert response to User format
-        this.currentUser = {
-          principal: null as unknown, // Demo users don't have real principals
-          role: response.data.role,
-          name: response.data.name,
-          isAuthenticated: true,
-          accessToken: demoToken
-        };
-        this.accessToken = demoToken;
-
-        console.log('✅ Restored demo session:', this.currentUser);
-        return this.currentUser;
-      } catch (error) {
-        console.error('Failed to restore demo session:', error);
-        // Clear invalid tokens
-        localStorage.removeItem('demo_access_token');
-        localStorage.removeItem('demo_user_role');
-        this.currentUser = null;
-        this.accessToken = null;
-      }
+    // Check hederaAuth state
+    if (hederaAuth.authenticated) {
+      this.currentUser = hederaAuth.user;
+      this.accessToken = hederaAuth.token;
+      return this.currentUser;
     }
 
-    // If we have a current user, return it
-    if (this.currentUser && this.accessToken) {
+    // Try to restore if not currently authenticated but might have session
+    const restored = await hederaAuth.restoreAuth();
+    if (restored) {
+      this.currentUser = hederaAuth.user;
+      this.accessToken = hederaAuth.token;
       return this.currentUser;
     }
 
