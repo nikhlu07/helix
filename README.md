@@ -3,14 +3,50 @@
 
 <img src="logo.png" alt="H.E.L.I.X. Logo" width="120"/>
 
+## 🏆 HACKATHON PROJECT | Hedera Hashgraph 2025
+
+> **Built for:** Hedera Hackathon 2025 - Blockchain for Social Impact  
+> **Category:** Government Transparency & Anti-Corruption  
+> **Innovation:** AI + Blockchain Fusion for Real-World Impact  
+> **Mission:** Prevent corruption-related deaths through technology
+
 > *"Where quantum algorithms pierce through the veil of deception, ensuring every credit reaches its destined coordinates in the digital frontier."*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-cyan.svg)](https://opensource.org/licenses/MIT)
+[![Hackathon](https://img.shields.io/badge/🏆_Hackathon-Hedera_2025-gold.svg)](#)
 [![React](https://img.shields.io/badge/React-18.x-neon.svg)](https://reactjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104.x-electric.svg)](https://fastapi.tiangolo.com/)
 [![Hedera](https://img.shields.io/badge/Hedera-HBAR-purple.svg)](https://hedera.com/)
 [![AI Detection](https://img.shields.io/badge/AI_Consciousness-Gemma3-holographic.svg)](#neural-sentinels)
 [![Live Demo](https://img.shields.io/badge/Live_Terminal-Active-bioluminescent.svg)](#quantum-interface)
+
+---
+
+## ⚡ QUICK DEMO FOR JUDGES
+
+**Want to see H.E.L.I.X. in action in under 5 minutes?**
+
+### 🎬 Watch the Demo
+- **[System Walkthrough Video](https://youtu.be/a3yCnXNPwdQ?si=_wN5xEL6jpQSyGiF)** - Complete demonstration (5 min)
+- **[Pitch Video](https://youtu.be/0UBLoz_86ds)** - Problem & solution overview (3 min)
+- **[Pitch Deck](https://drive.google.com/file/d/1v2i2EHywrPNiXXWuvsf_nko_78V1Klie/view)** - Full presentation
+
+### 🚀 Try the Live App
+**[Launch H.E.L.I.X. Web App](https://h-e-l-i-x.vercel.app)** - Fully deployed with real Hedera authentication
+
+**Quick Test Flow:**
+1. Choose "Demo Mode" for instant access (no wallet needed)
+2. Login as **Main Government** → Allocate budget to State Head
+3. Switch to **State Head** → Receive budget, allocate to Deputy
+4. Switch to **Deputy** → Process vendor payments
+5. Create a suspicious transaction → Watch AI fraud detection in action!
+
+### 💡 Key Innovation Highlights
+- **🤖 Hybrid AI Detection**: LLM (`gemma3:4b`) + Rule Engine = 92% fraud detection accuracy
+- **⛓️ Hedera Integration**: Smart contracts (HSCS) + Consensus Service (HCS) + DID authentication
+- **🏛️ Hierarchical Data Flow**: Real government structure simulation (Main Gov → State → Deputy → Vendor)
+- **📊 10 Fraud Detection Algorithms**: Budget anomalies, vendor collusion, invoice manipulation, and more
+- **👥 6 Role-Based Dashboards**: Government, State, Deputy, Vendor, Sub-Supplier, Citizen
 
 ---
 
@@ -424,12 +460,33 @@ We welcome fellow digital warriors, government entities, and citizen-guardians w
 
 This project operates under the MIT License - see the [LICENSE](LICENSE) file for quantum details.
 
-## 🏆 DIGITAL RECOGNITION
+## 🏆 HACKATHON ACHIEVEMENTS & INNOVATION
 
-### Hackathon Achievements
-- **Hedera Hackathon 2025**: Best Social Impact Quantum Project
-- **Innovation Award**: AI + Blockchain for Government Transparency
-- **Technical Excellence**: Full-stack implementation with quantum-ready architecture
+### 🎯 Technical Innovation
+- **✅ Hybrid AI Architecture**: First-of-its-kind combination of LLM (`gemma3:4b` via Ollama) with rule-based fraud detection
+- **✅ Real-time RAG Pipeline**: Dynamic Retrieval-Augmented Generation for context-aware fraud analysis
+- **✅ Hedera Full-Stack Integration**: Smart contracts (HSCS), Consensus Service (HCS), DID authentication, and File Service (HFS)
+- **✅ Hierarchical Government Simulation**: Complete data flow from Main Government → State → Deputy → Vendor with real-time budget allocation
+- **✅ Production-Ready Deployment**: Full Docker setup, Vercel deployment, comprehensive testing suite
+
+### 🌟 Social Impact Innovation
+- **✅ Real-World Problem**: Built to prevent tragedies like the Jhalawar incident (7 children died from corruption)
+- **✅ Citizen Empowerment**: Public transparency dashboard with anonymous corruption reporting
+- **✅ Multi-Stakeholder Design**: 6 specialized dashboards for different government roles
+- **✅ Scalable Solution**: Designed for deployment across multiple government levels and countries
+
+### 💻 Technical Excellence
+- **✅ Full-Stack TypeScript/Python**: Type-safe implementation across frontend and backend
+- **✅ 10 Fraud Detection Algorithms**: Comprehensive coverage of corruption patterns
+- **✅ 3 Authentication Methods**: Real Hedera Wallet, Simple DID Demo, and Demo Mode for flexibility
+- **✅ Comprehensive Documentation**: 20+ README files, API docs, deployment guides, and video walkthroughs
+- **✅ Clean Architecture**: Modular, testable, and maintainable codebase with clear separation of concerns
+
+### 🚀 Deployment & Demo
+- **✅ Live Production App**: [h-e-l-i-x.vercel.app](https://h-e-l-i-x.vercel.app)
+- **✅ Video Demonstrations**: System walkthrough and pitch videos on YouTube
+- **✅ Instant Demo Mode**: No wallet required for judges to test the system
+- **✅ Complete Pitch Deck**: Professional presentation with market analysis and technical architecture
 
 ## 👥 NEURAL COLLECTIVE
 
