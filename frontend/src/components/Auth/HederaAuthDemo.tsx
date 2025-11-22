@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Wallet, Key, Globe, CheckCircle, AlertCircle, Zap } from 'lucide-react';
-import iiAuth from '../../auth/internetIdentity';
+import hederaAuth from '../../auth/hederaWallet';
 
-interface ICPAuthDemoProps {
+interface HederaAuthDemoProps {
   onAuthSuccess?: (user: Record<string, unknown>) => void;
   showDemo?: boolean;
 }
@@ -15,26 +15,26 @@ interface AuthStep {
   details?: string;
 }
 
-export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps) {
+export function HederaAuthDemo({ onAuthSuccess, showDemo = true }: HederaAuthDemoProps) {
   const [authSteps, setAuthSteps] = useState<AuthStep[]>([
     {
-      id: 'identity',
-      title: 'Internet Identity Setup',
-      description: 'Connect to ICP Internet Identity service',
+      id: 'wallet',
+      title: 'Wallet Connection',
+      description: 'Connect to Hedera Wallet (HashPack)',
       status: 'pending',
-      details: 'Secure, anonymous authentication using WebAuthn'
+      details: 'Secure connection to your Hedera account'
     },
     {
-      id: 'principal',
-      title: 'Principal Generation',
-      description: 'Generate unique cryptographic identity',
+      id: 'account',
+      title: 'Account Verification',
+      description: 'Verify Account ID',
       status: 'pending',
-      details: 'Your principal ID is derived from your authentication method'
+      details: 'Confirm ownership of the Hedera account'
     },
     {
-      id: 'canister',
-      title: 'Canister Authentication',
-      description: 'Authenticate with CorruptGuard canister',
+      id: 'contract',
+      title: 'Contract Authorization',
+      description: 'Authorize with Smart Contract',
       status: 'pending',
       details: 'Verify role permissions on the blockchain'
     },
@@ -54,16 +54,16 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
 
   useEffect(() => {
     // Check if already authenticated
-    if (iiAuth.authenticated) {
+    if (hederaAuth.authenticated) {
       setIsAuthenticated(true);
-      setUserPrincipal(iiAuth.userPrincipal);
+      setUserPrincipal(hederaAuth.userPrincipal);
       markAllStepsCompleted();
     }
   }, []);
 
   const updateStepStatus = (stepId: string, status: AuthStep['status'], details?: string) => {
-    setAuthSteps(prev => prev.map(step => 
-      step.id === stepId 
+    setAuthSteps(prev => prev.map(step =>
+      step.id === stepId
         ? { ...step, status, details: details || step.details }
         : step
     ));
@@ -73,52 +73,44 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
     setAuthSteps(prev => prev.map(step => ({ ...step, status: 'completed' })));
   };
 
-  const handleICPLogin = async () => {
+  const handleHederaLogin = async () => {
     setIsLoading(true);
-    
+
     try {
-      // Step 1: Internet Identity
-      updateStepStatus('identity', 'active');
+      // Step 1: Wallet Connection
+      updateStepStatus('wallet', 'active');
       await new Promise(resolve => setTimeout(resolve, 1000)); // Demo delay
-      
-      // Initialize II auth
-      await iiAuth.init();
-      updateStepStatus('identity', 'completed', 'Internet Identity initialized');
-      
-      // Step 2: Principal Generation
-      updateStepStatus('principal', 'active');
+
+      // Initialize Hedera auth
+      await hederaAuth.init();
+      const user = await hederaAuth.login();
+
+      updateStepStatus('wallet', 'completed', 'Wallet connected successfully');
+
+      // Step 2: Account Verification
+      updateStepStatus('account', 'active');
       await new Promise(resolve => setTimeout(resolve, 800));
-      
-      // For demo, we'll simulate the II login
-      const mockPrincipal = `demo-${selectedRole}-${Math.random().toString(36).substr(2, 8)}`;
-      setUserPrincipal(mockPrincipal);
-      updateStepStatus('principal', 'completed', `Principal: ${mockPrincipal.substring(0, 20)}...`);
-      
-      // Step 3: Canister Authentication  
-      updateStepStatus('canister', 'active');
+
+      setUserPrincipal(user.principal);
+      updateStepStatus('account', 'completed', `Account: ${user.principal}`);
+
+      // Step 3: Contract Authorization  
+      updateStepStatus('contract', 'active');
       await new Promise(resolve => setTimeout(resolve, 1200));
-      updateStepStatus('canister', 'completed', 'Role verified on blockchain');
-      
+      updateStepStatus('contract', 'completed', 'Role verified on blockchain');
+
       // Step 4: Backend Integration
       updateStepStatus('backend', 'active');
       await new Promise(resolve => setTimeout(resolve, 600));
       updateStepStatus('backend', 'completed', 'Connected to fraud detection API');
-      
+
       setIsAuthenticated(true);
-      
-      // Create mock user object
-      const mockUser = {
-        principal: mockPrincipal,
-        role: selectedRole,
-        authMethod: 'internet_identity',
-        authenticated: true
-      };
-      
-      onAuthSuccess?.(mockUser);
-      
+
+      onAuthSuccess?.(user);
+
     } catch (error) {
-      console.error('ICP Auth failed:', error);
-      updateStepStatus('identity', 'error', 'Authentication failed');
+      console.error('Hedera Auth failed:', error);
+      updateStepStatus('wallet', 'error', 'Authentication failed');
     } finally {
       setIsLoading(false);
     }
@@ -127,30 +119,29 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
   const handleDemoLogin = async (role: string) => {
     setIsLoading(true);
     setSelectedRole(role);
-    
+
     try {
       // Quick demo authentication
-      const mockPrincipal = `demo-${role}-${Math.random().toString(36).substr(2, 8)}`;
+      const mockPrincipal = `0.0.${Math.floor(Math.random() * 1000000)}`;
+
+      // Use hederaAuth demo login
+      const user = await hederaAuth.loginDemo(mockPrincipal, role as any);
+
       setUserPrincipal(mockPrincipal);
       setIsAuthenticated(true);
       markAllStepsCompleted();
-      
-      const mockUser = {
-        principal: mockPrincipal,
-        role: role,
-        authMethod: 'demo',
-        authenticated: true
-      };
-      
-      onAuthSuccess?.(mockUser);
-      
+
+      onAuthSuccess?.(user);
+
+    } catch (error) {
+      console.error('Demo login failed:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await iiAuth.logout();
+    await hederaAuth.logout();
     setIsAuthenticated(false);
     setUserPrincipal(null);
     setAuthSteps(prev => prev.map(step => ({ ...step, status: 'pending' })));
@@ -169,12 +160,12 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
             Successfully Authenticated
           </h3>
           <div className="bg-slate-50 rounded-lg p-4 mb-4">
-            <p className="text-sm text-slate-600 mb-1">Principal ID:</p>
+            <p className="text-sm text-slate-600 mb-1">Account ID:</p>
             <p className="font-mono text-sm text-slate-800 break-all">{userPrincipal}</p>
           </div>
           <div className="flex items-center justify-center space-x-2 text-green-600 mb-4">
             <Shield className="h-4 w-4" />
-            <span className="text-sm font-medium">Secured by Internet Computer</span>
+            <span className="text-sm font-medium">Secured by Hedera Hashgraph</span>
           </div>
           <button
             onClick={handleLogout}
@@ -197,7 +188,7 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
           </div>
         </div>
         <h2 className="text-2xl font-bold text-slate-900 mb-2">
-          ICP Authentication
+          Hedera Authentication
         </h2>
         <p className="text-slate-600">
           Secure blockchain authentication for government transparency
@@ -206,56 +197,39 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
 
       {/* Authentication Methods */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Internet Identity */}
+        {/* Hedera Wallet */}
         <div className="bg-white rounded-xl border border-slate-200 p-6">
           <div className="flex items-center space-x-3 mb-4">
             <div className="p-2 bg-blue-50 rounded-lg">
               <Key className="h-6 w-6 text-blue-600" />
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900">Internet Identity</h3>
-              <p className="text-sm text-slate-600">Official ICP authentication</p>
+              <h3 className="font-semibold text-slate-900">Hedera Wallet</h3>
+              <p className="text-sm text-slate-600">Connect with HashPack</p>
             </div>
           </div>
-          
+
           <div className="space-y-3 mb-4">
             <div className="flex items-center space-x-2 text-sm text-slate-600">
               <Shield className="h-4 w-4" />
-              <span>WebAuthn secure authentication</span>
+              <span>Secure wallet connection</span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-slate-600">
               <Wallet className="h-4 w-4" />
-              <span>No passwords required</span>
+              <span>Sign transactions securely</span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-slate-600">
               <Zap className="h-4 w-4" />
-              <span>Blockchain verified identity</span>
+              <span>Real-time verification</span>
             </div>
           </div>
 
-          {/* Role Selection */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-slate-700 mb-2">
-              Select Role
-            </label>
-            <select
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="vendor">Vendor/Contractor</option>
-              <option value="government">Government Official</option>
-              <option value="deputy">Deputy/Local Authority</option>
-              <option value="citizen">Citizen Observer</option>
-            </select>
-          </div>
-
           <button
-            onClick={handleICPLogin}
+            onClick={handleHederaLogin}
             disabled={isLoading}
             className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-4 py-3 rounded-lg font-medium transition-colors"
           >
-            {isLoading ? 'Connecting...' : 'Login with Internet Identity'}
+            {isLoading ? 'Connecting...' : 'Connect Wallet'}
           </button>
         </div>
 
@@ -314,12 +288,11 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className={`font-medium ${
-                    step.status === 'completed' ? 'text-green-800' :
-                    step.status === 'active' ? 'text-blue-800' :
-                    step.status === 'error' ? 'text-red-800' :
-                    'text-slate-600'
-                  }`}>
+                  <p className={`font-medium ${step.status === 'completed' ? 'text-green-800' :
+                      step.status === 'active' ? 'text-blue-800' :
+                        step.status === 'error' ? 'text-red-800' :
+                          'text-slate-600'
+                    }`}>
                     {step.title}
                   </p>
                   <p className="text-sm text-slate-600">{step.details}</p>
@@ -330,21 +303,21 @@ export function ICPAuthDemo({ onAuthSuccess, showDemo = true }: ICPAuthDemoProps
         </div>
       )}
 
-      {/* ICP Info */}
+      {/* Hedera Info */}
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
-        <h4 className="font-semibold text-slate-900 mb-2">Why Internet Computer Authentication?</h4>
+        <h4 className="font-semibold text-slate-900 mb-2">Why Hedera Hashgraph?</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
           <div>
-            <strong>Decentralized Security:</strong> No single point of failure
+            <strong>Enterprise Grade:</strong> High throughput, low latency
           </div>
           <div>
-            <strong>Anonymous & Private:</strong> No personal data stored
+            <strong>Fair Ordering:</strong> No front-running possible
           </div>
           <div>
-            <strong>Tamper Proof:</strong> Blockchain-verified identities
+            <strong>ABFT Security:</strong> Highest grade of security
           </div>
           <div>
-            <strong>Government Ready:</strong> Enterprise-grade security
+            <strong>Low Fees:</strong> Predictable, low transaction costs
           </div>
         </div>
       </div>

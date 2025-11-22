@@ -199,7 +199,7 @@ class CorruptGuardService {
   async getClaims(): Promise<ClaimData[]> {
     try {
       const response = await apiGet<ClaimData[]>(
-        '/api/v1/icp/claims',
+        '/api/v1/hedera/claims',
         {},
         true
       );
@@ -213,7 +213,7 @@ class CorruptGuardService {
   async getClaimById(claimId: number): Promise<ClaimData> {
     try {
       const response = await apiGet<ClaimData>(
-        `/api/v1/icp/claims/${claimId}`,
+        `/api/v1/hedera/claims/${claimId}`,
         {},
         true
       );
@@ -227,7 +227,7 @@ class CorruptGuardService {
   async submitClaim(claimData: Omit<ClaimData, 'claim_id' | 'escrow_time' | 'total_paid_to_suppliers' | 'challenge_count'>): Promise<ClaimData> {
     try {
       const response = await apiPost<ClaimData>(
-        '/api/v1/icp/claims',
+        '/api/v1/hedera/claims',
         claimData,
         {},
         true
@@ -242,7 +242,7 @@ class CorruptGuardService {
   async getBudgets(): Promise<BudgetData[]> {
     try {
       const response = await apiGet<BudgetData[]>(
-        '/api/v1/icp/budgets',
+        '/api/v1/hedera/budgets',
         {},
         true
       );
@@ -256,7 +256,7 @@ class CorruptGuardService {
   async getFraudAlerts(): Promise<FraudAlert[]> {
     try {
       const response = await apiGet<FraudAlert[]>(
-        '/api/v1/icp/fraud-alerts',
+        '/api/v1/hedera/fraud-alerts',
         {},
         true
       );
@@ -270,7 +270,7 @@ class CorruptGuardService {
   async getSystemStats(): Promise<SystemStats> {
     try {
       const response = await apiGet<SystemStats>(
-        '/api/v1/icp/stats',
+        '/api/v1/hedera/stats',
         {},
         true
       );

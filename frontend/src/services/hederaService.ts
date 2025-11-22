@@ -15,7 +15,7 @@ class HederaService {
 
     constructor() {
         // LedgerId, ProjectId, Metadata, Debug
-        this.hashConnect = new HashConnect("testnet" as any, "1234567890", APP_METADATA, false);
+        this.hashConnect = new HashConnect("testnet" as any, "5577a7f1a3595697a3cae7608ec950f6", APP_METADATA, false);
         console.log("Hedera Service Initialized");
     }
 

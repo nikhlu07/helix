@@ -36,7 +36,8 @@ def deploy_contract():
         # Install specific solc version if needed
         install_solc('0.8.20')
         
-        with open("../../contracts/Procurement.sol", "r") as f:
+        contract_path = os.path.join(os.path.dirname(__file__), "..", "..", "contracts", "Procurement.sol")
+        with open(contract_path, "r") as f:
             source = f.read()
 
         compiled_sol = compile_standard({
