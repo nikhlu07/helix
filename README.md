@@ -27,7 +27,6 @@
 **Want to see H.E.L.I.X. in action in under 5 minutes?**
 
 ### 🎬 Watch the Demo
-- **[System Walkthrough Video](https://youtu.be/a3yCnXNPwdQ?si=_wN5xEL6jpQSyGiF)** - Complete demonstration (5 min)
 - **[Pitch Video](https://youtu.be/0UBLoz_86ds)** - Problem & solution overview (3 min)
 - **[Pitch Deck](https://drive.google.com/file/d/1v2i2EHywrPNiXXWuvsf_nko_78V1Klie/view)** - Full presentation
 
